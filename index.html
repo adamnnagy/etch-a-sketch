@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Etch-a-sketch</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<script src="js/script.js" type="module" defer></script>
+	</head>
+	<body>
+		<h1>Etch-a-sketch</h1>
+		<p>etch it bro</p>
+		<main class="screen"></main>
+		<aside class="controls">
+			<div class="brushes"></div>
+			<div class="slide-container">
+				<input
+					type="range"
+					name="grid-size"
+					id="grid-size"
+					min="1"
+					max="100"
+                    value="16"
+				/>
+                <p id="grid-size-display">16x16</p>
+			</div>
+		</aside>
+	</body>
+</html>
