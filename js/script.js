@@ -101,30 +101,36 @@ gridSizeSlider.addEventListener("change", (e) => {
 	console.log(getCurrentGridSize(), getNewGridSize());
 });
 
-const changeBlockColor = (e, color) => {
-	e.target.style.backgroundColor = color;
+const changeBlockColor = (e) => {
+	e.target.style.backgroundColor = currentColor;
 };
 
+// const enableDraw = () => {
+// 	gridContainer.addEventListener("mouseover", (e) => {
+// 		changeBlockColor(e, currentColor);
+// 	});
+//     console.log('draw enabled');
+// };
 const enableDraw = () => {
-	gridContainer.addEventListener("mouseover", (e) => {
-		changeBlockColor(e, currentColor);
-	});
+	gridContainer.addEventListener("mouseover", changeBlockColor);
     console.log('draw enabled');
 };
 
 const disableDraw = () => {
-	gridContainer.removeEventListener("mouseover", (e) => {
-		changeBlockColor(e, currentColor);
-	});
+	gridContainer.removeEventListener("mouseover", changeBlockColor);
     console.log('draw disabled');
 };
 
-gridContainer.addEventListener("mousedown", () => {
-	enableDraw();
-});
-gridContainer.addEventListener("mouseup", () => {
-	disableDraw();
-});
+// const disableDraw = () => {
+// 	gridContainer.removeEventListener("mouseover", (e) => {
+// 		changeBlockColor(e, currentColor);
+// 	});
+//     console.log('draw disabled');
+// };
+
+gridContainer.addEventListener("mousedown", enableDraw);
+gridContainer.addEventListener("mouseup", disableDraw);
+gridContainer.addEventListener("mouseleave", disableDraw);
 
 const initialRun = () => {
 	createGrid(getNewGridSize());
