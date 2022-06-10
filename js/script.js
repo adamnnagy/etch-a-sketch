@@ -103,31 +103,21 @@ gridSizeSlider.addEventListener("change", (e) => {
 
 const changeBlockColor = (e) => {
 	e.target.style.backgroundColor = currentColor;
+    console.log(`${e}`);
+    // e.stopPropagation();
 };
 
-// const enableDraw = () => {
-// 	gridContainer.addEventListener("mouseover", (e) => {
-// 		changeBlockColor(e, currentColor);
-// 	});
-//     console.log('draw enabled');
-// };
 const enableDraw = () => {
+	gridContainer.addEventListener("click", changeBlockColor);
 	gridContainer.addEventListener("mouseover", changeBlockColor);
-    console.log('draw enabled');
 };
 
 const disableDraw = () => {
+    gridContainer.removeEventListener("click", changeBlockColor);
 	gridContainer.removeEventListener("mouseover", changeBlockColor);
-    console.log('draw disabled');
 };
 
-// const disableDraw = () => {
-// 	gridContainer.removeEventListener("mouseover", (e) => {
-// 		changeBlockColor(e, currentColor);
-// 	});
-//     console.log('draw disabled');
-// };
-
+gridContainer.addEventListener("click", changeBlockColor);
 gridContainer.addEventListener("mousedown", enableDraw);
 gridContainer.addEventListener("mouseup", disableDraw);
 gridContainer.addEventListener("mouseleave", disableDraw);

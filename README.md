@@ -45,6 +45,7 @@ to add / remove - could use the .splice() function on the gridItems array.
 
 Drawing on the grid
 1. draw when the mouse clicks
+    currently mousedown only enables drawing, but it doesn't draw, as it draw is attached to the mouseover event.
 1. draw after a click, as the mouse moves around
 1. stop drawing when the mouse is up
 
