@@ -22,6 +22,7 @@ const createGridBlock = (size) => {
 	block.classList.add("grid-block");
 	block.style.width = `${size}px`;
 	block.style.height = `${size}px`;
+	block.draggable = false;
 	return block;
 };
 
@@ -102,11 +103,10 @@ gridSizeSlider.addEventListener("change", (e) => {
 });
 
 const changeBlockColor = (e) => {
-    if (e.target.classList.contains('grid-block')) {
-        
-        e.target.style.backgroundColor = currentColor;
-        e.stopPropagation();
-    }
+	e.preventDefault();
+	if (e.target.classList.contains("grid-block")) {
+		e.target.style.backgroundColor = currentColor;
+	}
 };
 
 const enableDraw = () => {
@@ -115,14 +115,20 @@ const enableDraw = () => {
 };
 
 const disableDraw = () => {
-    gridContainer.removeEventListener("click", changeBlockColor);
+	gridContainer.removeEventListener("click", changeBlockColor);
 	gridContainer.removeEventListener("mouseover", changeBlockColor);
 };
 
 gridContainer.addEventListener("click", changeBlockColor);
-gridContainer.addEventListener("mousedown", enableDraw);
+gridContainer.addEventListener("mousedown", (e) => {
+	changeBlockColor(e);
+	enableDraw();
+});
 gridContainer.addEventListener("mouseup", disableDraw);
 gridContainer.addEventListener("mouseleave", disableDraw);
+// gridContainer.addEventListener("drag", e => {
+//     e.preventDefault();
+// });
 
 const initialRun = () => {
 	createGrid(getNewGridSize());

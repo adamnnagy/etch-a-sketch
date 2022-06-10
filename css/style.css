@@ -7,14 +7,14 @@ html {
 }
 
 #grid-container {
-    height: 400px;
-    width: 400px;
+    height: 600px;
+    width: 600px;
     display: flex;
     flex-wrap: wrap;
 }
 
-.grid-item {
-    border: #000 solid 1px;
+.grid-block {
+    border: #000 dotted 0.1px;
     display: inline-block;
     margin: 0;
 }
