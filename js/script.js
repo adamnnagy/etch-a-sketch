@@ -11,23 +11,23 @@ const displayGridSize = (gridSize) => {
 	sliderLabel.textContent = `${gridSize}x${gridSize}`;
 };
 
-const getGridItemSize = (gridSize, gridContainer) => {
+const getGridBlockSize = (gridSize, gridContainer) => {
 	const containerWidth = gridContainer.offsetWidth;
-	const itemSize = containerWidth / gridSize;
-	return itemSize;
+	const blockSize = containerWidth / gridSize;
+	return blockSize;
 };
 
-const createGridItem = (size) => {
-	const gridItem = document.createElement("div");
-	gridItem.classList.add("grid-item");
-	gridItem.style.width = `${size}px`;
-	gridItem.style.height = `${size}px`;
-	return gridItem;
+const createGridBlock = (size) => {
+	const block = document.createElement("div");
+	block.classList.add("grid-block");
+	block.style.width = `${size}px`;
+	block.style.height = `${size}px`;
+	return block;
 };
 
-const resizeItem = (item, size) => {
-	item.style.width = `${size}px`;
-	item.style.height = `${size}px`;
+const resizeBlock = (block, size) => {
+	block.style.width = `${size}px`;
+	block.style.height = `${size}px`;
 };
 
 const isLargerGrid = (currSize, newSize) => {
@@ -37,21 +37,21 @@ const isLargerGrid = (currSize, newSize) => {
 const getSizeDifference = (currSize, newSize) =>
 	Math.abs(newSize * newSize - currSize * currSize);
 
-const addGridItemToContainer = (item) => {
-	gridContainer.appendChild(item);
+const addGridBlockToContainer = (block) => {
+	gridContainer.appendChild(block);
 };
 
 const resizeGrid = (newSize) => {
-	const gridItems = getGridItems();
-	const resized = gridItems.map((item) => {
-		item.style.height = `${newSize}px`;
-		item.style.width = `${newSize}px`;
+	const gridBlocks = getGridBlocks();
+	const resized = gridBlocks.map((block) => {
+		block.style.height = `${newSize}px`;
+		block.style.width = `${newSize}px`;
 	});
 	return resized;
 };
 
-const getGridItems = () => {
-	return [...document.querySelectorAll(".grid-item")];
+const getGridBlocks = () => {
+	return [...document.querySelectorAll(".grid-block")];
 };
 
 const removeGrid = () => {
@@ -59,17 +59,17 @@ const removeGrid = () => {
 };
 
 const clearGrid = () => {
-	getGridItems().forEach((i) => (i.style.backgroundColor = "#FFF"));
+	getGridBlocks().forEach((i) => (i.style.backgroundColor = "#FFF"));
 };
 
 const createGrid = (newSize) => {
-	let gridItems = getGridItems();
+	let gridBlocks = getGridBlocks();
 	clearGrid();
 	removeGrid();
 	const currentGridSize = getCurrentGridSize();
 	const diff = getSizeDifference(currentGridSize, newSize);
-	gridItems.forEach((i) =>
-		resizeItem(i, getGridItemSize(newSize, gridContainer))
+	gridBlocks.forEach((i) =>
+		resizeBlock(i, getGridBlockSize(newSize, gridContainer))
 	);
 	if (isLargerGrid(currentGridSize, newSize)) {
 		for (
@@ -77,15 +77,15 @@ const createGrid = (newSize) => {
 			i < newSize * newSize - currentGridSize * currentGridSize;
 			i++
 		) {
-			gridItems.push(
-				createGridItem(getGridItemSize(newSize, gridContainer))
+			gridBlocks.push(
+				createGridBlock(getGridBlockSize(newSize, gridContainer))
 			);
 		}
 	} else {
-		gridItems = gridItems.slice(0, newSize * newSize);
+		gridBlocks = gridBlocks.slice(0, newSize * newSize);
 	}
 
-	gridItems.forEach((i) => addGridItemToContainer(i));
+	gridBlocks.forEach((i) => addGridBlockToContainer(i));
 
 	setCurrentGridSize(newSize);
 };
@@ -102,9 +102,11 @@ gridSizeSlider.addEventListener("change", (e) => {
 });
 
 const changeBlockColor = (e) => {
-	e.target.style.backgroundColor = currentColor;
-    console.log(`${e}`);
-    // e.stopPropagation();
+    if (e.target.classList.contains('grid-block')) {
+        
+        e.target.style.backgroundColor = currentColor;
+        e.stopPropagation();
+    }
 };
 
 const enableDraw = () => {
