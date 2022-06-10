@@ -1,17 +1,15 @@
+const gridContainer = document.querySelector("#grid-container");
 const gridSizeSlider = document.querySelector("#grid-size");
+
 const getNewGridSize = () => Number(gridSizeSlider.value);
 
-let currentSize = 0;
 const getCurrentGridSize = () => Number(currentSize);
 const setCurrentGridSize = (size) => (currentSize = size);
 
-const sliderLabel = document.querySelector("#grid-size-display");
-
 const displayGridSize = (gridSize) => {
+	const sliderLabel = document.querySelector("#grid-size-display");
 	sliderLabel.textContent = `${gridSize}x${gridSize}`;
 };
-
-const gridContainer = document.querySelector("#grid-container");
 
 const getGridItemSize = (gridSize, gridContainer) => {
 	const containerWidth = gridContainer.offsetWidth;
@@ -36,21 +34,49 @@ const isLargerGrid = (currSize, newSize) => {
 	return currSize < newSize;
 };
 
-const getSizeDifference = (currSize, newSize) => Math.abs(currSize - newSize);
+const getSizeDifference = (currSize, newSize) =>
+	Math.abs(newSize * newSize - currSize * currSize);
+
 const addGridItemToContainer = (item) => {
 	gridContainer.appendChild(item);
 };
 
-const createGrid = (newSize) => {
-	let gridItems = [...document.querySelectorAll(".grid-item")];
+const resizeGrid = (newSize) => {
+	const gridItems = getGridItems();
+	const resized = gridItems.map((item) => {
+		item.style.height = `${newSize}px`;
+		item.style.width = `${newSize}px`;
+	});
+	return resized;
+};
+
+const getGridItems = () => {
+	return [...document.querySelectorAll(".grid-item")];
+};
+
+const removeGrid = () => {
 	gridContainer.innerHTML = "";
-	const currSize = getCurrentGridSize();
-	const diff = getSizeDifference(currSize, newSize);
+};
+
+const clearGrid = () => {
+	getGridItems().forEach((i) => (i.style.backgroundColor = "#FFF"));
+};
+
+const createGrid = (newSize) => {
+	let gridItems = getGridItems();
+	clearGrid();
+	removeGrid();
+	const currentGridSize = getCurrentGridSize();
+	const diff = getSizeDifference(currentGridSize, newSize);
 	gridItems.forEach((i) =>
 		resizeItem(i, getGridItemSize(newSize, gridContainer))
 	);
-	if (isLargerGrid(currSize, newSize)) {
-		for (let i = 0; i < newSize * newSize - currSize * currSize; i++) {
+	if (isLargerGrid(currentGridSize, newSize)) {
+		for (
+			let i = 0;
+			i < newSize * newSize - currentGridSize * currentGridSize;
+			i++
+		) {
 			gridItems.push(
 				createGridItem(getGridItemSize(newSize, gridContainer))
 			);
@@ -64,19 +90,40 @@ const createGrid = (newSize) => {
 	setCurrentGridSize(newSize);
 };
 
-const resizeGrid = (newSize) => {
-	const gridItems = [...document.querySelectorAll(".grid-item")];
-	const resized = gridItems.map((item) => {
-		item.style.height = `${newSize}px`;
-		item.style.width = `${newSize}px`;
-	});
-	return resized;
-};
+// main
+const currentColor = "#232323";
+const screenColor = "#FFFFFF";
+let currentSize = 0;
 
 gridSizeSlider.addEventListener("change", (e) => {
-	displayGridSize(e.target.value);
+	displayGridSize(getCurrentGridSize());
 	createGrid(getNewGridSize());
 	console.log(getCurrentGridSize(), getNewGridSize());
+});
+
+const changeBlockColor = (e, color) => {
+	e.target.style.backgroundColor = color;
+};
+
+const enableDraw = () => {
+	gridContainer.addEventListener("mouseover", (e) => {
+		changeBlockColor(e, currentColor);
+	});
+    console.log('draw enabled');
+};
+
+const disableDraw = () => {
+	gridContainer.removeEventListener("mouseover", (e) => {
+		changeBlockColor(e, currentColor);
+	});
+    console.log('draw disabled');
+};
+
+gridContainer.addEventListener("mousedown", () => {
+	enableDraw();
+});
+gridContainer.addEventListener("mouseup", () => {
+	disableDraw();
 });
 
 const initialRun = () => {

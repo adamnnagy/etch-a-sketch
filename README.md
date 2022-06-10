@@ -43,6 +43,10 @@ to add / remove - could use the .splice() function on the gridItems array.
     when adding - .splice(array.length, 0, [...newItems])
     when removing - .splice(array.length, difference)
 
+Drawing on the grid
+1. draw when the mouse clicks
+1. draw after a click, as the mouse moves around
+1. stop drawing when the mouse is up
 
 
 ### different brushes

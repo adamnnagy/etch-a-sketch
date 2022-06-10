@@ -15,4 +15,6 @@ html {
 
 .grid-item {
     border: #000 solid 1px;
+    display: inline-block;
+    margin: 0;
 }
