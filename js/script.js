@@ -19,6 +19,7 @@ const createGridBlock = (size) => {
 	block.classList.add("grid-block");
 	block.style.width = `${size}px`;
 	block.style.height = `${size}px`;
+    block.style.backgroundColor = screenColor;
 	block.draggable = false;
 	return block;
 };
@@ -105,6 +106,7 @@ const gridContainer = document.querySelector("#grid-container");
 const gridSizeSlider = document.querySelector("#grid-size");
 const blackBrushButton = document.querySelector("#black-brush-button");
 const rainbowBrushButton = document.querySelector("#rainbow-brush-button");
+const eraserBrushButton = document.querySelector("#eraser-brush-button");
 const clearButton = document.querySelector("#clear-button");
 
 gridSizeSlider.addEventListener("change", (e) => {
@@ -115,18 +117,26 @@ gridSizeSlider.addEventListener("change", (e) => {
 
 const unfocusBrushes = () => {
 	const brushes = document.querySelectorAll(".brush");
-	brushes.forEach(brush => brush.classList.remove("active-color"));
+	brushes.forEach((brush) => brush.classList.remove("active-color"));
 };
 
 blackBrushButton.addEventListener("click", (e) => {
 	currentColor = blackBrush;
-    unfocusBrushes()
+	unfocusBrushes();
+	e.target.classList.add("active-color");
+});
+
+eraserBrushButton.addEventListener("click", (e) => {
+	currentColor = () => {
+		return screenColor;
+	};
+	unfocusBrushes();
 	e.target.classList.add("active-color");
 });
 
 rainbowBrushButton.addEventListener("click", (e) => {
 	currentColor = randomColorBrush;
-    unfocusBrushes()
+	unfocusBrushes();
 	e.target.classList.add("active-color");
 });
 
