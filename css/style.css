@@ -12,7 +12,7 @@ body {
     align-items: center;
     background-color: darkred;
     height: 80vh;
-
+    color: white;
 }
 
 .title {
@@ -52,13 +52,13 @@ button {
     margin: 1rem 0;
 }
 
-.brush:hover {
+button:hover {
     transform: translate(0, -2px);
 
 }
 
 .active-color {
-    background: darkred;
+    background: goldenrod;
     color: #fff;
 }
 
