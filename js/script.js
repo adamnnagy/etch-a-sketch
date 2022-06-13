@@ -109,6 +109,8 @@ const rainbowBrushButton = document.querySelector("#rainbow-brush-button");
 const eraserBrushButton = document.querySelector("#eraser-brush-button");
 const clearButton = document.querySelector("#clear-button");
 
+//event listeners
+
 gridSizeSlider.addEventListener("change", (e) => {
 	displayGridSize(getNewGridSize());
 	createGrid(getNewGridSize());
