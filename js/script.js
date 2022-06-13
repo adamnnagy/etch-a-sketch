@@ -56,6 +56,14 @@ const removeGrid = () => {
 	gridContainer.innerHTML = "";
 };
 
+const randomColorBrush = () => {
+	return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+};
+
+const blackBrush = () => {
+	return "#232323";
+};
+
 const clearGrid = () => {
 	getGridBlocks().forEach((i) => (i.style.backgroundColor = screenColor));
 };
@@ -89,7 +97,7 @@ const createGrid = (newSize) => {
 };
 
 // main
-let currentColor = "#232323";
+let currentColor = blackBrush;
 const screenColor = "#FFFFFF";
 let currentSize = 0;
 
@@ -106,11 +114,11 @@ gridSizeSlider.addEventListener("change", (e) => {
 });
 
 blackBrushButton.addEventListener("click", () => {
-	currentColor = "#232323";
+	currentColor = blackBrush;
 });
 
 rainbowBrushButton.addEventListener("click", () => {
-	currentColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+	currentColor = randomColorBrush;
 });
 
 clearButton.addEventListener("click", clearGrid);
@@ -118,7 +126,7 @@ clearButton.addEventListener("click", clearGrid);
 const changeBlockColor = (e) => {
 	e.preventDefault();
 	if (e.target.classList.contains("grid-block")) {
-		e.target.style.backgroundColor = currentColor;
+		e.target.style.backgroundColor = currentColor();
 	}
 };
 
@@ -139,9 +147,6 @@ gridContainer.addEventListener("mousedown", (e) => {
 });
 gridContainer.addEventListener("mouseup", disableDraw);
 gridContainer.addEventListener("mouseleave", disableDraw);
-// gridContainer.addEventListener("drag", e => {
-//     e.preventDefault();
-// });
 
 const initialRun = () => {
 	createGrid(getNewGridSize());

@@ -13,12 +13,13 @@ body {
 }
 
 #grid-container {
-    height: 600px;
-    width: 600px;
+    height: 400px;
+    width: 400px;
     display: flex;
     flex-wrap: wrap;
     /* border: #222 solid 15px; */
     border-radius: 10px;
+    flex: 1;
 }
 
 .grid-block {
