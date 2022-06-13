@@ -1,6 +1,3 @@
-const gridContainer = document.querySelector("#grid-container");
-const gridSizeSlider = document.querySelector("#grid-size");
-
 const getNewGridSize = () => Number(gridSizeSlider.value);
 
 const getCurrentGridSize = () => Number(currentSize);
@@ -60,7 +57,7 @@ const removeGrid = () => {
 };
 
 const clearGrid = () => {
-	getGridBlocks().forEach((i) => (i.style.backgroundColor = "#FFF"));
+	getGridBlocks().forEach((i) => (i.style.backgroundColor = screenColor));
 };
 
 const createGrid = (newSize) => {
@@ -92,15 +89,31 @@ const createGrid = (newSize) => {
 };
 
 // main
-const currentColor = "#232323";
+let currentColor = "#232323";
 const screenColor = "#FFFFFF";
 let currentSize = 0;
 
+const gridContainer = document.querySelector("#grid-container");
+const gridSizeSlider = document.querySelector("#grid-size");
+const blackBrushButton = document.querySelector("#black-brush-button");
+const rainbowBrushButton = document.querySelector("#rainbow-brush-button");
+const clearButton = document.querySelector("#clear-button");
+
 gridSizeSlider.addEventListener("change", (e) => {
-	displayGridSize(getCurrentGridSize());
+	displayGridSize(getNewGridSize());
 	createGrid(getNewGridSize());
 	console.log(getCurrentGridSize(), getNewGridSize());
 });
+
+blackBrushButton.addEventListener("click", () => {
+	currentColor = "#232323";
+});
+
+rainbowBrushButton.addEventListener("click", () => {
+	currentColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+});
+
+clearButton.addEventListener("click", clearGrid);
 
 const changeBlockColor = (e) => {
 	e.preventDefault();
