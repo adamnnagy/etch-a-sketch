@@ -113,12 +113,21 @@ gridSizeSlider.addEventListener("change", (e) => {
 	console.log(getCurrentGridSize(), getNewGridSize());
 });
 
-blackBrushButton.addEventListener("click", () => {
+const unfocusBrushes = () => {
+	const brushes = document.querySelectorAll(".brush");
+	brushes.forEach(brush => brush.classList.remove("active-color"));
+};
+
+blackBrushButton.addEventListener("click", (e) => {
 	currentColor = blackBrush;
+    unfocusBrushes()
+	e.target.classList.add("active-color");
 });
 
-rainbowBrushButton.addEventListener("click", () => {
+rainbowBrushButton.addEventListener("click", (e) => {
 	currentColor = randomColorBrush;
+    unfocusBrushes()
+	e.target.classList.add("active-color");
 });
 
 clearButton.addEventListener("click", clearGrid);

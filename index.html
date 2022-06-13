@@ -9,14 +9,21 @@
 		<script src="js/script.js" type="module" defer></script>
 	</head>
 	<body>
-		<h1>Etch-a-sketch</h1>
-		<p>etch it bro</p>
+		<h1 class="title">Etch-a-sketch</h1>
+		<p>etch it bro and etch it hard</p>
 		<div class="container">
 			<aside class="controls">
 				<div class="brushes">
-					<button id="black-brush-button">Black</button
-					><button id="rainbow-brush-button">Color</button
-					><button id="clear-button">Clear</button>
+					<button id="black-brush-button" class="brush active-color">
+						Black
+					</button>
+					<button id="rainbow-brush-button" class="brush">
+						Color
+					</button>
+					<button id="eraser-brush-button" class="brush">
+						Eraser
+					</button>
+					<button id="clear-button">Clear</button>
 				</div>
 				<div class="slide-container">
 					<input
@@ -24,7 +31,7 @@
 						name="grid-size"
 						id="grid-size"
 						min="1"
-						max="100"
+						max="64"
 						value="16"
 					/>
 					<p id="grid-size-display">16x16</p>

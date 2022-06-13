@@ -10,6 +10,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: darkred;
+    height: 80vh;
+
+}
+
+.title {
+    color: gold;
 }
 
 #grid-container {
@@ -17,9 +24,8 @@ body {
     width: 400px;
     display: flex;
     flex-wrap: wrap;
-    /* border: #222 solid 15px; */
     border-radius: 10px;
-    flex: 1;
+    flex-shrink: 0;
 }
 
 .grid-block {
@@ -32,5 +38,60 @@ body {
     display: flex;
     justify-content: space-between;
     width: 60vw;
+}
 
+.brushes {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+button {
+    border: #000 solid 2px;
+    border-radius: 5px;
+    margin: 1rem 0;
+}
+
+.brush:hover {
+    transform: translate(0, -2px);
+
+}
+
+.active-color {
+    background: darkred;
+    color: #fff;
+}
+
+@media all and (max-width: 1000px) {
+    
+#grid-container {
+    height: 400px;
+    width: 400px;
+}
+    
+}
+@media all and (max-width: 800px) {
+    .container {
+     flex-direction: column;
+        width: 60vw;
+    }
+    #grid-container {
+        height: 400px;
+        width: 400px;
+    }   
+    
+}
+@media all and (max-width: 600px) {
+    #grid-container {
+        height: 400px;
+        width: 400px;
+    }
+    
+}
+@media all and (max-width: 400px) {
+    #grid-container {
+        height: 300px;
+        width: 300px;
+    }
+    
 }
