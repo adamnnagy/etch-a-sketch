@@ -1,97 +1,99 @@
 html {
-    box-sizing: border-box;
+	box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
 }
 
-*, *::before, *::after {
-    box-sizing: inherit;
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: darkred;
-    height: 80vh;
-    color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: darkred;
+	height: 80vh;
+	color: white;
 }
 
 .title {
-    color: gold;
+	color: gold;
 }
 
 #grid-container {
-    height: 400px;
-    width: 400px;
-    display: flex;
-    flex-wrap: wrap;
-    border-radius: 10px;
-    flex-shrink: 0;
+	height: 400px;
+	width: 400px;
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 10px;
+	flex-shrink: 0;
 }
 
 .grid-block {
-    border: #000 dotted 0.1px;
-    display: inline-block;
-    margin: 0;
+	border: #000 dotted 0.1px;
+	display: inline-block;
+	margin: 0;
 }
 
 .container {
-    display: flex;
-    justify-content: space-between;
-    width: 60vw;
+	display: flex;
+	justify-content: space-between;
+	width: 60vw;
+    align-items: center;
 }
 
 .brushes {
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
+	display: flex;
+	flex-direction: column;
+	height: fit-content;
 }
 
 button {
-    border: #000 solid 2px;
-    border-radius: 5px;
-    margin: 1rem 0;
+	border: #000 solid 2px;
+	border-radius: 5px;
+	margin: 0.5rem 0;
 }
 
 button:hover {
-    transform: translate(0, -2px);
-
+	transform: translate(0, -2px);
 }
 
 .active-color {
-    background: goldenrod;
-    color: #fff;
+	background: goldenrod;
+	color: #fff;
 }
 
 @media all and (max-width: 1000px) {
-    
-#grid-container {
-    height: 400px;
-    width: 400px;
-}
-    
+	#grid-container {
+		height: 400px;
+		width: 400px;
+	}
 }
 @media all and (max-width: 800px) {
-    .container {
-     flex-direction: column;
-        width: 60vw;
-    }
-    #grid-container {
-        height: 400px;
-        width: 400px;
-    }   
-    
+	.container {
+		flex-direction: column;
+		width: 60vw;
+
+	}
+	#grid-container {
+		height: 400px;
+		width: 400px;
+	}
 }
 @media all and (max-width: 600px) {
-    #grid-container {
-        height: 400px;
-        width: 400px;
+	.container {
+        flex-direction: column-reverse;
     }
-    
+	#grid-container {
+		height: 300px;
+		width: 300px;
+	}
 }
 @media all and (max-width: 400px) {
-    #grid-container {
-        height: 300px;
-        width: 300px;
-    }
-    
+	#grid-container {
+		height: 300px;
+		width: 300px;
+	}
 }
