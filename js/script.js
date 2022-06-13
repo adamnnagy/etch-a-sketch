@@ -19,7 +19,7 @@ const createGridBlock = (size) => {
 	block.classList.add("grid-block");
 	block.style.width = `${size}px`;
 	block.style.height = `${size}px`;
-    block.style.backgroundColor = screenColor;
+	block.style.backgroundColor = screenColor;
 	block.draggable = false;
 	return block;
 };
@@ -144,9 +144,20 @@ clearButton.addEventListener("click", clearGrid);
 
 const changeBlockColor = (e) => {
 	e.preventDefault();
-	if (e.target.classList.contains("grid-block")) {
-		e.target.style.backgroundColor = currentColor();
+
+    let block = null;
+    if (e.targetTouches) {
+		const x = e.targetTouches[0].clientX;
+		const y = e.targetTouches[0].clientY;
+		block = document.elementFromPoint(x, y);
+	} else {
+        block = e.target;
+    }
+
+	if (block.classList.contains("grid-block")) {
+		block.style.backgroundColor = currentColor();
 	}
+	
 };
 
 const enableDraw = () => {
@@ -166,6 +177,14 @@ gridContainer.addEventListener("mousedown", (e) => {
 });
 gridContainer.addEventListener("mouseup", disableDraw);
 gridContainer.addEventListener("mouseleave", disableDraw);
+
+gridContainer.addEventListener("touchmove", (e) => {
+	changeBlockColor(e);
+	enableDraw();
+});
+
+gridContainer.addEventListener("touchstart", changeBlockColor);
+gridContainer.addEventListener("touchend", disableDraw);
 
 const initialRun = () => {
 	createGrid(getNewGridSize());
